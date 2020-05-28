@@ -1,0 +1,28 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <h1>Publicar Pregunta</h1>
+      
+      <% if @question.errors.any? %>
+        <div class="alert alert-danger">
+          <ul>
+          <% @question.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <%= form_for @question do |f| %>
+        <div class="form-group">
+          <%= f.label :Titulo, class: "font-weight-bold" %>
+          <%= f.text_field :title, class: "form-control input-lg" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :Cuerpo, class: "font-weight-bold"%>
+          <%= f.text_area :body, class: "form-control input-lg" %>
+        </div>
+        <%= f.submit "¡Preguntar!", class: "btn btn-primary btn-lg btn-block"%>
+      <% end %>
+    </div>
+  </div>
+</div>
