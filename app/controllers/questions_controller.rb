@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+  
   def index
     @questions = Question.all
   end
@@ -13,6 +15,7 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
+    @question.user = current_user
     if @question.save
         redirect_to :questions, notice: "La pregunta fue publicada con éxito"
     else
