@@ -27,7 +27,7 @@
               </td>
               <td>
                 <h4 ><%= link_to question.title, question_path(question.id), class: "text-danger"%></h4>
-                <p class="text-muted">Esta es la descripcion de la pregunta</p>
+                <p class="text-muted">Preguntó <%= question.user.email %> hace <%= time_ago_in_words(question.created_at)%></p>
               </td>
             </tr>
           <% end %>
