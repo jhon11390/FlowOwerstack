@@ -29,9 +29,41 @@
       </div>
     </div>
   </div>
+  <hr class="my-4">
   <div class="row">
     <div class="col">
-      <h4>Repuestas:</h4>
+      <h4><%= @question.answers.length %> Respuesta(s)</h4>
+
+      <% @question.answers.each do |question| %>
+        <div class="row mt-4">
+          <div class="col-2 text-center align-self-center">
+            <h4 class="text-muted">Votos</h4>
+          </div>
+          <div class="col-10">
+            <div class="card mb-3">
+              <header class="card-header bg-dark text-white">Respuesta por <%= question.user.email %></header>
+              <div class="card-body"><%= question.body %></div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+
+      <% if signed_in? %>
+        <%= form_for [@question, @question.answers.build] do |f| %>
+          <div class="form-group">
+            <%= f.text_area :body, class: "form-control", placeholder: "Agregar respuesta" %>
+          </div>
+          <div class="actions text-right">
+            <%= f.submit "Enviar Respuesta", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      <% end %>
+
     </div>
   </div>
 </div>
