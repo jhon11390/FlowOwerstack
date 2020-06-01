@@ -4,5 +4,10 @@ Rails.application.routes.draw do
   root 'questions#index'
   resources :questions, except: [:edit, :update, :destroy] do
     resources :answers, only: [:create]
+    resources :comments, only: [:create]
+  end
+
+  resources :answers, only: [:create] do
+    post '/commentanswer', to: 'comments#create_answer'
   end
 end
