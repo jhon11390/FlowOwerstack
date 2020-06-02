@@ -5,7 +5,11 @@ class CommentsController < ApplicationController
         @comment.user = current_user
         @comment.save
 
-        redirect_to @commentable, notice: "El comentario fue publicado con éxito"
+        redirect_to @commentable
+
+        unless @comment.save
+            flash[:alert] = "El comentario no puede estar vacio"
+        end
     end
 
     def create_answer
@@ -14,7 +18,11 @@ class CommentsController < ApplicationController
         @comment.user = current_user
         @comment.save
 
-        redirect_to @comment.commentable.question, notice: "El comentario fue publicado con éxito"
+        redirect_to @comment.commentable.question
+
+        unless @comment.save
+            flash[:alert] = "El comentario no puede estar vacio"
+        end
     end
 
     private

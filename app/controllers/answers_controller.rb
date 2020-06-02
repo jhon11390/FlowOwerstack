@@ -3,7 +3,11 @@ class AnswersController < ApplicationController
         question = Question.find(params[:question_id])
         question.answers.create(answers_params)
 
-        redirect_to question, notice: "La respuesta fue publicada con éxito"
+        redirect_to question
+
+        unless question.save
+            flash[:alert] = "La respuesta no puede estar vacia"
+        end
     end
 
     private
