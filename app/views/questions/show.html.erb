@@ -12,6 +12,7 @@
         <div class="row align-items-center">
           <div class="col-2">
 
+            <!-- votos de pregunta -->
             <% if @question.voted_by? current_user%>
               <%= link_to question_vote_question_path(@question), method: :delete, class: "question-upvote upvote-active" do %>
                 <span class="upvote-arrow"></span>
@@ -25,26 +26,30 @@
             <% end %>
 
           </div>
+
           <div class="col-10">
             <p class="lead"><%= @question.body.capitalize %></p>
           </div>
         </div>
+
         <hr class="my-4">
+
         <div class="row">
           <div class="col-2 text-center align-self-center">
             <h4 class="text-muted"></h4>
           </div>
+          <!-- Cometarios pregunta -->
           <div class="col">
-            <h4>Comentarios:</h4>
+            <h4><u>Comentarios:</u></h4>
 
             <div class="row">
               <div class="col">
 
                 <% @question.comments.each do |comment| %>
-                  <div class="row mt-4">
+                  <div class="row">
                     <div class="col">
                       <div class="card mb-3">
-                        <div class="card-body"><%= comment.body %></div>
+                        <div class="card-body"><em><%= comment.body %></em></div>
                       </div>
                     </div>
                   </div>
@@ -52,7 +57,8 @@
 
               </div>
             </div>
-            <div class="row">
+            <!-- Formulario Comentario Pregunta -->
+            <div class="row mt-4">
               <div class="col">
 
                 <% if signed_in? %>
@@ -61,7 +67,7 @@
                       <%= f.text_area :body, class: "form-control", placeholder: "Agregar comentario" %>
                     </div>
                     <div class="actions text-right">
-                      <%= f.submit "Enviar Respuesta", class: "btn btn-primary" %>
+                      <%= f.submit "Comentar Pregunta", class: "btn btn-success" %>
                     </div>
                   <% end %>
                 <% end %>
@@ -74,7 +80,10 @@
       </div>
     </div>
   </div>
+
   <hr class="my-4">
+
+  <!-- Respuestas -->
   <div class="row">
     <div class="col">
       <h4><%= @question.answers.length %> Respuesta(s)</h4>
@@ -97,26 +106,27 @@
           </div>
           <div class="col-10">
             <div class="card mb-3">
-              <header class="card-header bg-dark text-white">Respuesta por <%= question.user.email %></header>
+              <header class="card-header bg-secondary text-white">Respuesta por <strong><%= question.user.email %></strong></header>
               <div class="card-body"><%= question.body %></div>
             </div>
           </div>
         </div>
-
-         <div class="row justify-content-end">
+        <!-- Comentarios Respuesta -->
+         <div class="row justify-content-end mt-4">
           <div class="col-10">
+            <h4><u>Comentarios Respuestas</u></h4>
             <% question.comments.each do |comment| %>
-              <div class="row mt-4">
+              <div class="row">
                 <div class="col">
-                  <h4>Comentarios</h4>
                   <div class="card mb-3">
-                    <div class="card-body"><%= comment.body %></div>
+                    <div class="card-body"><em><%= comment.body %></em></div>
                   </div>
                 </div>
               </div>
             <% end %>
           </div>
         </div>
+        <!-- Formulario Comenta Respuesta -->
          <div class="row justify-content-end">
           <div class="col-10">
       
@@ -126,7 +136,7 @@
                   <%= f.text_area :body, class: "form-control", placeholder: "Agregar comentario"%>
                 </div>
                 <div class="actions text-right">
-                  <%= f.submit "Enviar Respuesta", class: "btn btn-primary" %>
+                  <%= f.submit "Comentar Respuesta", class: "btn btn-success" %>
                 </div>
               <% end %>
             <% end %>
@@ -138,7 +148,11 @@
 
     </div>
   </div>
-  <div class="row">
+
+  <hr class="my-4">
+
+  <!-- Formulario Para Enviar Respuesta -->
+  <div class="row mt-4 mb-4">
     <div class="col">
 
       <% if signed_in? %>
@@ -147,7 +161,7 @@
             <%= f.text_area :body, class: "form-control", placeholder: "Agregar respuesta" %>
           </div>
           <div class="actions text-right">
-            <%= f.submit "Enviar Respuesta", class: "btn btn-primary" %>
+            <%= f.submit "Responder a esta pregunta", class: "btn btn-primary" %>
           </div>
         <% end %>
       <% end %>
