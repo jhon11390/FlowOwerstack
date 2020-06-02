@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
         @comment.user = current_user
         @comment.save
 
-        redirect_to @commentable
+        redirect_to @commentable, notice: "El comentario fue publicado con éxito"
     end
 
     def create_answer
@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
         @comment.user = current_user
         @comment.save
 
-        redirect_to @comment.commentable.question
+        redirect_to @comment.commentable.question, notice: "El comentario fue publicado con éxito"
     end
 
     private

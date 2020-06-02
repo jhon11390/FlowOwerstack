@@ -3,7 +3,7 @@ class AnswersController < ApplicationController
         question = Question.find(params[:question_id])
         question.answers.create(answers_params)
 
-        redirect_to question
+        redirect_to question, notice: "La respuesta fue publicada con éxito"
     end
 
     private

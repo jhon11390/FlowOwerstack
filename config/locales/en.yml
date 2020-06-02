@@ -31,3 +31,10 @@
 
 en:
   hello: "Hello world"
+
+es:
+  activerecord:
+    attributes:
+      question:
+        title: "Titulo"
+        body: "Cuerpo"
