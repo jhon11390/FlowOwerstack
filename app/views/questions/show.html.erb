@@ -9,9 +9,21 @@
       <div class="jumbotron">
         <p class="card-text text-muted">Publicado por <%= @question.user.email%></p>
         <h1 class="display-4"><%= @question.title.capitalize %></h1>
-        <div class="row">
-          <div class="col-2 text-center align-self-center">
-            <h4 class="text-muted">Votos</h4>
+        <div class="row align-items-center">
+          <div class="col-2">
+
+            <% if @question.voted_by? current_user%>
+              <%= link_to question_vote_question_path(@question), method: :delete, class: "question-upvote upvote-active" do %>
+                <span class="upvote-arrow"></span>
+                <span class="upvote-count"><%= @question.vote_questions.count %></span>
+              <% end %>
+            <% else %>
+              <%= link_to question_vote_question_path(@question), method: :post, class: "question-upvote" do %>
+                <span class="upvote-arrow"></span>
+                <span class="upvote-count"><%= @question.vote_questions.count %></span>
+              <% end %>
+            <% end %>
+
           </div>
           <div class="col-10">
             <p class="lead"><%= @question.body.capitalize %></p>

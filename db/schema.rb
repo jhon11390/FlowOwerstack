@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_31_135535) do
+ActiveRecord::Schema.define(version: 2020_06_02_014716) do
 
   create_table "answers", force: :cascade do |t|
     t.text "body"
@@ -51,6 +51,17 @@ ActiveRecord::Schema.define(version: 2020_05_31_135535) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "vote_questions", force: :cascade do |t|
+    t.integer "question_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_id"], name: "index_vote_questions_on_question_id"
+    t.index ["user_id"], name: "index_vote_questions_on_user_id"
+  end
+
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
+  add_foreign_key "vote_questions", "questions"
+  add_foreign_key "vote_questions", "users"
 end
