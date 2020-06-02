@@ -28,7 +28,7 @@
           </div>
 
           <div class="col-10">
-            <p class="lead"><%= @question.body.capitalize %></p>
+            <p class="lead"><%= markdown(@question.body.capitalize) %></p>
           </div>
         </div>
 
@@ -107,7 +107,7 @@
           <div class="col-10">
             <div class="card mb-3">
               <header class="card-header bg-secondary text-white">Respuesta por <strong><%= question.user.email %></strong></header>
-              <div class="card-body"><%= question.body %></div>
+              <div class="card-body"><%= markdown(question.body) %></div>
             </div>
           </div>
         </div>
